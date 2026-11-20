@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10182d">
+<title>魂の指針 | THE COMPASS OF THE SOUL</title>
+<style>
+:root{--bg:#0c1427;--panel:#131f38;--panel2:#192744;--gold:#d8b66a;--gold2:#f0d99d;--ink:#f5f1e8;--muted:#b7c0d0;--line:#34425f;--blue:#91a9d3}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#293b60 0%,#111d35 42%,var(--bg) 78%);color:var(--ink);font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
+.wrap{width:min(760px,calc(100% - 32px));margin:0 auto;padding:34px 0 60px}
+.brand{text-align:center;margin:12px 0 28px}.eyebrow{letter-spacing:.28em;color:var(--gold);font-size:.72rem}.brand h1{font-family:"Yu Mincho",YuMincho,"Hiragino Mincho ProN",serif;font-size:clamp(2.3rem,8vw,4rem);font-weight:500;letter-spacing:.16em;margin:10px 0 2px}.subtitle{color:var(--gold2);font-size:.78rem;letter-spacing:.2em}.ornament{color:var(--gold);letter-spacing:.55em;margin-top:15px}
+.panel{background:linear-gradient(145deg,rgba(25,39,68,.96),rgba(15,26,47,.97));border:1px solid rgba(216,182,106,.3);border-radius:22px;padding:clamp(22px,5vw,42px);box-shadow:0 22px 70px #0005}
+h2{font-family:"Yu Mincho",YuMincho,serif;font-weight:500;letter-spacing:.08em;margin:0 0 14px;font-size:1.55rem}
+p{line-height:1.9;color:var(--muted)}.lead{color:var(--ink);font-size:1.04rem}.small{font-size:.82rem;color:var(--muted)}
+.primary,.secondary,.choice{border-radius:999px;padding:13px 23px;border:1px solid var(--gold);transition:.2s}
+.primary{background:linear-gradient(110deg,#c49b4b,#ead18b);color:#172039;font-weight:700;min-width:190px}.primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.secondary{background:transparent;color:var(--gold2)}.secondary:hover{background:#ffffff10}
+.center{text-align:center}.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:5px 12px;color:var(--gold2);font-size:.75rem;letter-spacing:.08em}
+.type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:24px 0}
+.type-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#ffffff06}.type-card b{display:block;color:var(--gold2);margin-bottom:4px}.type-card span{font-size:.82rem;color:var(--muted)}
+.progress-head{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.82rem;margin-bottom:10px}.track{height:5px;background:#ffffff16;border-radius:9px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#b58a42,#f0d99d);transition:width .25s}
+.question-meta{color:var(--gold);font-size:.75rem;letter-spacing:.16em;margin:28px 0 12px}.question{font-size:clamp(1.18rem,4vw,1.5rem);line-height:1.8;color:var(--ink);min-height:110px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:24px 0 10px}.scale button{background:#ffffff08;border:1px solid var(--line);border-radius:12px;color:var(--muted);padding:13px 5px;min-height:76px;font-size:.82rem;line-height:1.5}.scale button strong{display:block;color:var(--gold2);font-size:1.15rem;margin-bottom:4px}.scale button.selected{background:#d8b66a20;border-color:var(--gold);color:var(--ink);box-shadow:inset 0 0 0 1px #d8b66a55}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px}.nav button{min-width:112px}
+.choice-list{display:grid;gap:12px;margin-top:22px}.choice{text-align:left;border-color:var(--line);background:#ffffff08;color:var(--ink);border-radius:14px;padding:16px 18px;line-height:1.65}.choice:hover,.choice.selected{border-color:var(--gold);background:#d8b66a18}.choice strong{color:var(--gold2);margin-right:9px}
+.result-top{text-align:center;margin-bottom:28px}.result-top .rank{color:var(--gold);letter-spacing:.18em;font-size:.78rem}.result-top h2{font-size:2.2rem;margin:8px 0}.result-top .desc{max-width:560px;margin:0 auto}
+.score-list{display:grid;gap:15px;margin:25px 0}.score-row{display:grid;grid-template-columns:84px 1fr 48px;gap:12px;align-items:center;font-size:.9rem}.score-track{height:9px;border-radius:9px;background:#ffffff16;overflow:hidden}.score-fill{height:100%;background:linear-gradient(90deg,#9d783b,#e7cd8a);border-radius:9px}
+.result-section{border-top:1px solid var(--line);padding-top:22px;margin-top:22px}.result-section h3{color:var(--gold2);font-size:1.05rem;letter-spacing:.08em}.result-section p{margin:8px 0}
+.notice{font-size:.76rem;color:#9eabc0;line-height:1.7;margin-top:20px}
+.hidden{display:none!important}.footer{text-align:center;color:#8491a8;font-size:.72rem;margin-top:24px;letter-spacing:.08em}
+@media(max-width:520px){.wrap{padding-top:20px}.panel{border-radius:17px}.scale{gap:5px}.scale button{font-size:.7rem;padding:10px 2px;min-height:72px}.scale button strong{font-size:1rem}.nav button{min-width:0;flex:1}.score-row{grid-template-columns:70px 1fr 42px}.type-grid{gap:8px}}
+@media print{body{background:#fff;color:#172039}.panel{box-shadow:none;background:#fff;border:1px solid #bbb;color:#172039}.result-section p,.desc{color:#333}.footer,.actions{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="brand">
+  <div class="eyebrow">A PERSONALITY & VALUES DISCOVERY</div>
+  <h1>魂の指針</h1>
+  <div class="subtitle">THE COMPASS OF THE SOUL</div>
+  <div class="ornament">✧ ───── ✧</div>
+</header>
+
+<main>
+<section id="intro" class="panel">
+  <div class="center"><span class="pill">VALUES DIAGNOSTIC · 30 QUESTIONS</span></div>
+  <h2 class="center" style="margin-top:24px">あなたの行動を導くものは何か。</h2>
+  <p class="lead center">人はそれぞれ、異なる価値観を判断や行動の拠り所にしています。<br>30の問いを通して、あなたの内側にある「指針」を探ります。</p>
+  <div class="type-grid">
+    <div class="type-card"><b>信念型</b><span>信条・正義・誠実</span></div>
+    <div class="type-card"><b>利益型</b><span>合理性・利益・戦略</span></div>
+    <div class="type-card"><b>真理型</b><span>真実・探究・知識</span></div>
+    <div class="type-card"><b>共生型</b><span>他者・寛容・調和</span></div>
+  </div>
+  <p class="small">所要時間の目安：約5〜8分。正解・不正解はありません。理想の自分ではなく、普段の自分に近い感覚で回答してください。</p>
+  <p class="notice">この診断は価値観を振り返るためのオリジナルコンテンツであり、医学的・心理学的な診断や、科学的に妥当性が検証された性格検査ではありません。回答内容はこのブラウザ内で採点し、外部サーバーには送信しません。</p>
+  <div class="actions"><button class="primary" id="start">診断を始める</button></div>
+</section>
+
+<section id="quiz" class="panel hidden" aria-live="polite">
+  <div class="progress-head"><span id="progressLabel">QUESTION 1 / 30</span><span id="progressPercent">3%</span></div>
+  <div class="track"><div class="bar" id="progressBar"></div></div>
+  <div class="question-meta" id="chapter">CHAPTER 01 · CONVICTION</div>
+  <div class="question" id="questionText"></div>
+  <div id="likert" class="scale">
+    <button data-value="4"><strong>4</strong>非常に<br>当てはまる</button>
+    <button data-value="3"><strong>3</strong>やや<br>当てはまる</button>
+    <button data-value="2"><strong>2</strong>どちらとも<br>いえない</button>
+    <button data-value="1"><strong>1</strong>あまり<br>当てはまらない</button>
+    <button data-value="0"><strong>0</strong>まったく<br>当てはまらない</button>
+  </div>
+  <div id="fourChoice" class="choice-list hidden"></div>
+  <div class="nav"><button class="secondary" id="back">戻る</button><button class="primary" id="next" disabled>次へ</button></div>
+  <p class="notice">回答はいつでも「戻る」から変更できます。質問の順番は診断開始時にランダムになります。</p>
+</section>
+
+<section id="result" class="panel hidden">
+  <div class="result-top">
+    <div class="rank" id="rankLabel">YOUR COMPASS</div>
+    <h2 id="mainType"></h2>
+    <div class="pill" id="subType"></div>
+    <p class="desc" id="resultIntro"></p>
+  </div>
+  <div class="result-section">
+    <h3>価値観のバランス</h3>
+    <div class="score-list" id="scoreList"></div>
+  </div>
+  <div class="result-section"><h3>あなたの指針</h3><p id="detail"></p></div>
+  <div class="result-section"><h3>強みとして表れやすいこと</h3><p id="strength"></p></div>
+  <div class="result-section"><h3>意識しておきたいこと</h3><p id="caution"></p></div>
+  <p class="notice">結果は今回の回答に基づく傾向の目安です。人の価値観は状況や経験によって変化し、ひとつのタイプだけで表せるものではありません。得点差が小さい場合は、複数の価値観を同程度に大切にしている可能性があります。</p>
+  <div class="actions">
+    <button class="primary" id="saveImage">結果を画像で保存</button>
+    <button class="secondary" id="share">結果を共有</button>
+    <button class="secondary" id="restart">もう一度診断する</button>
+  </div>
+</section>
+</main>
+<div class="footer">THE COMPASS OF THE SOUL · 魂の指針</div>
+</div>
+<script>
+const types = {
+ conviction:{name:"信念型",en:"CONVICTION",tag:"信条・正義・誠実",intro:"自分が正しいと認めた価値観や原則を、行動の拠り所とする傾向があります。",detail:"自分の内側にある信条と、実際の言動を一致させようとします。周囲の評価や一時的な感情に流されるよりも、自分が正しいと考えることに誠実であろうとします。",strength:"一貫性、誠実さ、責任感、困難な状況でも大切な原則を守ろうとする意志。",caution:"自分の信念を大切にするあまり、異なる立場や新しい根拠を受け入れにくくなることがあります。信念を守ることと、考えを更新することの両立も大切です。"},
+ interest:{name:"利益型",en:"INTEREST",tag:"合理性・利益・戦略",intro:"目的に対して有効な手段を選び、望ましい結果や自分にとっての利益を重視する傾向があります。",detail:"限られた時間や資源をどう使えば成果につながるかを考え、状況に応じて方法を柔軟に変えます。利益は金銭だけでなく、時間、機会、安心、評価なども含みます。",strength:"合理的な判断、現実的な見通し、状況への適応力、交渉や計画における戦略性。",caution:"効率や損得を優先しすぎると、過程にある意味や他者の感情、長期的な信頼を見落とすことがあります。"},
+ truth:{name:"真理型",en:"TRUTH",tag:"真実・探究・知識",intro:"物事の事実や本質を明らかにすることを重視し、根拠に基づいて理解しようとする傾向があります。",detail:"常識や他者の主張をそのまま受け入れるのではなく、根拠や論理を確かめます。個々の知識を集めるだけでなく、それらの関係性や全体の仕組みを理解しようとします。",strength:"探究心、知的好奇心、批判的思考、複雑な事柄を整理して体系的に理解する力。",caution:"正確さや検証を重視するあまり、結論を出すまでに時間がかかったり、感情や価値判断が関わる問題を扱いにくく感じたりすることがあります。"},
+ harmony:{name:"共生型",en:"HARMONY",tag:"他者・寛容・調和",intro:"他者との関係を大切にし、異なる価値観や立場を尊重しながら、互いに納得できる関係を築こうとする傾向があります。",detail:"相手の事情や気持ちを想像し、対立が生じたときにも一方的に押し通すのではなく、対話や調整を通じて折り合いを探ります。",strength:"思いやり、寛容さ、協調性、仲介や合意形成を通じて人々をつなぐ力。",caution:"関係性を優先しすぎると、自分の意見や必要な主張を抑えてしまうことがあります。調和のために率直に伝えることも大切です。"}
+};
+const questions = [
+{id:1,t:"conviction",rev:false,q:"自分が正しいと信じていることについては、周囲から反対されても簡単には考えを変えない。"},
+{id:2,t:"conviction",rev:true,q:"周囲の意見や状況が変われば、それまで大切にしていた自分の考えも比較的容易に変更することができる。"},
+{id:3,t:"conviction",rev:false,q:"たとえ自分に不利益が生じても、一度交わした約束は守るべきだと思う。"},
+{id:4,t:"conviction",rev:true,q:"自分の発言と実際の行動が多少矛盾していても、それほど気にならない。"},
+{id:5,t:"conviction",rev:false,q:"立場や人間関係にかかわらず、不正や不公平な行為は正すべきだと思う。"},
+{id:6,t:"conviction",rev:true,q:"自分が正しいと考えていることであっても、困難や批判に直面すれば、無理に貫く必要はないと思う。"},
+{id:7,t:"conviction",rev:false,q:"他者に対してだけでなく、自分自身に対しても嘘をつきたくない。"},
+{id:8,t:"interest",rev:false,q:"物事に取り組む際には、できるだけ少ない労力で大きな成果を得られる方法を考える。"},
+{id:9,t:"interest",rev:true,q:"一度決めた方法については、たとえ別の方法の方が効率的だと分かっても、変更することに抵抗を感じる。"},
+{id:10,t:"interest",rev:true,q:"損得や効率よりも、そのときの感情や気持ちを優先して物事を決めることが多い。"},
+{id:11,t:"interest",rev:false,q:"他者との交渉や駆け引きでは、相手の心理や利害関係を読み取ることが重要だと思う。"},
+{id:12,t:"interest",rev:true,q:"直接的な成果や見返りが期待できなくても、時間や労力を惜しまずに物事へ取り組むことが多い。"},
+{id:13,t:"interest",rev:false,q:"物事を判断する際には、理想よりも現実的に実現できるかどうかを重視する。"},
+{id:14,t:"interest",rev:false,q:"自分にとって有利な状況を作るために、周囲の状況や人間関係を戦略的に活用することがある。"},
+{id:15,t:"truth",rev:false,q:"世間一般で正しいとされていることでも、根拠が不十分であれば疑問を持つ。"},
+{id:16,t:"truth",rev:true,q:"多くの人が正しいと考えていることについては、特別な理由がなければ、あえて疑問を持つ必要はないと思う。"},
+{id:17,t:"truth",rev:false,q:"自分が正しいと思っていたことでも、客観的な証拠によって間違いだと分かれば考えを改める。"},
+{id:18,t:"truth",rev:true,q:"自分の生活や実際の利益に直接関係しない知識を、わざわざ深く調べたいとはあまり思わない。"},
+{id:19,t:"truth",rev:false,q:"他者の意見や主張を受け入れる際には、その根拠や論理が妥当であるかを確認したい。"},
+{id:20,t:"truth",rev:true,q:"物事の全体的な仕組みや他の事柄との関係を理解するよりも、個々の情報を知ることに満足することが多い。"},
+{id:21,t:"truth",rev:false,q:"一つの物事について、表面的な情報だけでなく、その背景や本質まで掘り下げて考えたい。"},
+{id:22,t:"harmony",rev:false,q:"自分とは異なる価値観を持つ人であっても、その考え方を尊重したいと思う。"},
+{id:23,t:"harmony",rev:true,q:"他者との関係を良好に保つことよりも、自分の意見や考えを明確に主張することを優先する場合が多い。"},
+{id:24,t:"harmony",rev:false,q:"困っている人がいれば、自分に多少の負担が生じても助けたいと思う。"},
+{id:25,t:"harmony",rev:true,q:"意見が対立した際には、互いに妥協点を探すよりも、自分の主張を通すことを重視する。"},
+{id:26,t:"harmony",rev:false,q:"他者の立場や気持ちを想像し、自分とは異なる事情があることを理解しようとする。"},
+{id:27,t:"harmony",rev:true,q:"他者との意見の衝突は避ける必要がなく、自分の考えを率直にぶつけ合うことが重要だと思う。"},
+{id:28,t:"harmony",rev:false,q:"集団で何かを行う際には、個人の成果だけでなく、全体の調和や協力関係を重視する。"},
+{id:29,t:"conviction",rev:false,q:"他者から強く反対されたとしても、自分が正しいと信じることであれば、根拠を持って主張し続けたい。",special:{conviction:.75,truth:.75}},
+{id:30,t:"special",rev:false,q:"あなたが人生で何かを判断するとき、最終的な決め手として最も重要だと感じるものは何ですか？",options:[
+{key:"A",label:"自分が正しいと認めた信条や原則に従っていること。",type:"conviction"},
+{key:"B",label:"自分にとって最も望ましい結果につながること。",type:"interest"},
+{key:"C",label:"客観的な事実や根拠に基づいていること。",type:"truth"},
+{key:"D",label:"他者を尊重し、良好な関係を築けること。",type:"harmony"}]}
+];
+const secondary={3:{harmony:.25},4:{truth:.25},5:{harmony:.25},11:{harmony:.25},13:{truth:.25},17:{conviction:.25},19:{harmony:.25},20:{harmony:.25}};
+const names={conviction:"信念型",interest:"利益型",truth:"真理型",harmony:"共生型"};
+let order=[],answers={},index=0,resultData=null;
+const $=id=>document.getElementById(id);
+function shuffle(a){let x=[...a];for(let i=x.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
+function show(id){["intro","quiz","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id))}
+function start(){order=shuffle(questions);answers={};index=0;show("quiz");render()}
+function current(){return order[index]}
+function render(){
+ const q=current(),answered=answers[q.id]!==undefined;
+ $("progressLabel").textContent=`QUESTION ${index+1} / ${order.length}`;
+ $("progressPercent").textContent=`${Math.round((index+1)/order.length*100)}%`;
+ $("progressBar").style.width=`${(index+1)/order.length*100}%`;
+ const chapter=q.t==="special"?"FINAL QUESTION":`CHAPTER · ${types[q.t].en}`;
+ $("chapter").textContent=chapter+(q.rev?" · 逆方向の質問":"");
+ $("questionText").textContent=q.q;
+ $("likert").classList.toggle("hidden",q.t==="special");
+ $("fourChoice").classList.toggle("hidden",q.t!=="special");
+ if(q.t==="special"){
+   $("fourChoice").innerHTML="";
+   q.options.forEach(o=>{let b=document.createElement("button");b.className="choice"+(answers[q.id]===o.key?" selected":"");b.innerHTML=`<strong>${o.key}.</strong> ${o.label}`;b.onclick=()=>{answers[q.id]=o.key;render()};$("fourChoice").appendChild(b)});
+ }else{
+   $("likert").querySelectorAll("button").forEach(b=>b.classList.toggle("selected",Number(b.dataset.value)===answers[q.id]));
+ }
+ $("back").disabled=index===0;
+ $("back").style.opacity=index===0?".35":"1";
+ $("next").disabled=!answered;
+ $("next").textContent=index===order.length-1?"結果を見る":"次へ";
+}
+$("start").onclick=start;
+$("likert").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{answers[current().id]=Number(b.dataset.value);render()}));
+$("back").onclick=()=>{if(index>0){index--;render()}};
+$("next").onclick=()=>{if(answers[current().id]===undefined)return;if(index<order.length-1){index++;render()}else calculate()};
+function calculate(){
+ const scores={conviction:0,interest:0,truth:0,harmony:0};
+ const max={conviction:0,interest:0,truth:0,harmony:0};
+ for(const q of questions){
+   if(q.t==="special")continue;
+   const weights={[q.t]:1,...(secondary[q.id]||{}),...(q.special||{})};
+   Object.entries(weights).forEach(([t,w])=>{max[t]+=4*w;let v=answers[q.id];if(q.rev)v=4-v;scores[t]+=v*w});
+ }
+ // Q30 contributes four points to the selected value; every type has the same possible four-point addition.
+ Object.keys(scores).forEach(t=>max[t]+=4);
+ const selected=questions.find(q=>q.id===30).options.find(o=>o.key===answers[30]);
+ scores[selected.type]+=4;
+ const pct={};Object.keys(scores).forEach(t=>pct[t]=scores[t]/max[t]*100);
+ const sorted=Object.keys(pct).sort((a,b)=>pct[b]-pct[a]);
+ resultData={scores,pct,sorted,selected};
+ renderResult();
+}
+function renderResult(){
+ const {pct,sorted,selected}=resultData,first=sorted[0],second=sorted[1],gap=pct[first]-pct[second];
+ $("rankLabel").textContent=gap<4?"YOUR BALANCED COMPASS":"YOUR PRIMARY COMPASS";
+ $("mainType").textContent=gap<4?`${names[first]}・${names[second]}の複合傾向`:names[first];
+ $("subType").textContent=gap<4?"上位2タイプが近いバランス":`次点の傾向：${names[second]}`;
+ $("resultIntro").textContent=gap<4?`あなたの回答では、${names[first]}と${names[second]}の価値観が近い強さで表れています。`:types[first].intro;
+ $("detail").textContent=gap<4?`${types[first].detail} それと同時に、${types[second].detail}`:types[first].detail;
+ $("strength").textContent=gap<4?`${types[first].strength} また、${types[second].strength}`:types[first].strength;
+ $("caution").textContent=gap<4?`${types[first].caution} また、${types[second].caution}`:types[first].caution;
+ $("scoreList").innerHTML="";
+ sorted.forEach(t=>{let row=document.createElement("div");row.className="score-row";let n=document.createElement("b");n.textContent=names[t];let track=document.createElement("div");track.className="score-track";let fill=document.createElement("div");fill.className="score-fill";fill.style.width=`${Math.max(0,Math.min(100,pct[t]))}%`;track.appendChild(fill);let val=document.createElement("strong");val.textContent=`${Math.round(pct[t])}点`;row.append(n,track,val);$("scoreList").appendChild(row)});
+ show("result");
+}
+$("restart").onclick=()=>{show("intro")};
+function resultText(){const {pct,sorted}=resultData;return `魂の指針｜THE COMPASS OF THE SOUL\n診断結果：${names[sorted[0]]}（次点：${names[sorted[1]]}）\n${sorted.map(t=>`${names[t]}：${Math.round(pct[t])}点`).join("\n")}\nあなたの価値観を振り返るためのオリジナル診断です。`}
+$("share").onclick=async()=>{let txt=resultText();if(navigator.share){try{await navigator.share({title:"魂の指針｜診断結果",text:txt})}catch(e){}}else{try{await navigator.clipboard.writeText(txt);$("share").textContent="結果をコピーしました"}catch(e){alert(txt)}}};
+$("saveImage").onclick=()=>{
+ const {pct,sorted}=resultData;const canvas=document.createElement("canvas");canvas.width=1200;canvas.height=1500;const c=canvas.getContext("2d");
+ const g=c.createLinearGradient(0,0,1200,1500);g.addColorStop(0,"#172746");g.addColorStop(1,"#091225");c.fillStyle=g;c.fillRect(0,0,1200,1500);
+ c.strokeStyle="#d8b66a";c.lineWidth=3;c.strokeRect(42,42,1116,1416);
+ c.textAlign="center";c.fillStyle="#d8b66a";c.font="28px sans-serif";c.fillText("THE COMPASS OF THE SOUL",600,125);
+ c.fillStyle="#f5f1e8";c.font="bold 76px serif";c.fillText("魂の指針",600,235);
+ c.fillStyle="#d8b66a";c.font="30px sans-serif";c.fillText("あなたの診断結果",600,315);
+ c.fillStyle="#f5f1e8";c.font="bold 64px sans-serif";c.fillText(names[sorted[0]],600,445);
+ c.fillStyle="#b7c0d0";c.font="30px sans-serif";c.fillText(`次点：${names[sorted[1]]}`,600,505);
+ let y=660;sorted.forEach(t=>{c.textAlign="left";c.fillStyle="#f5f1e8";c.font="34px sans-serif";c.fillText(names[t],145,y);c.fillStyle="#34425f";c.fillRect(340,y-28,600,18);c.fillStyle="#d8b66a";c.fillRect(340,y-28,600*pct[t]/100,18);c.textAlign="right";c.fillStyle="#f0d99d";c.fillText(`${Math.round(pct[t])}点`,1050,y);y+=125});
+ c.textAlign="center";c.fillStyle="#b7c0d0";c.font="25px sans-serif";c.fillText("価値観を振り返るためのオリジナル診断",600,1260);c.fillStyle="#d8b66a";c.font="23px sans-serif";c.fillText("THE COMPASS OF THE SOUL",600,1330);
+ const a=document.createElement("a");a.download="魂の指針_診断結果.png";a.href=canvas.toDataURL("image/png");a.click();
+};
+</script>
+</body>
+</html>
